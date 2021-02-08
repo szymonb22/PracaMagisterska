@@ -1,2 +1,2 @@
-# PracaMagisterska
-in progress 
+# PracaMagiserska
+temat :(w budowie)
