@@ -1,2 +1,2 @@
-# PracaMagiserska
+# Praca Magisterska
 temat :(w budowie)
