@@ -7,9 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import {routes} from './routes';
 import { MainComponent } from './main/main.component';
+import { SignsManagmentComponent } from './signs-managment/signs-managment.component';
+import { AddSignComponent } from './signs-managment/add-sign/add-sign.component';
 
 @NgModule({
-  declarations: [LayoutComponent, MainComponent],
+  declarations: [LayoutComponent, MainComponent, SignsManagmentComponent, AddSignComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
