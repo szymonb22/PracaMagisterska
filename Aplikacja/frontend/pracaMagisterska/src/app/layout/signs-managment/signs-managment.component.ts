@@ -10,7 +10,7 @@ import { AddSignComponent } from './add-sign/add-sign.component';
   styleUrls: ['./signs-managment.component.scss']
 })
 export class SignsManagmentComponent implements OnInit {
-  ModalTitle = "Dodaj znak";
+
   signsFromDataSet: RoadSign[];
   PhotoFilePath="http://127.0.0.1:8000/dataset/";
 
@@ -25,20 +25,22 @@ export class SignsManagmentComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.width = '40%';
-    dialogConfig.height = '70%';
+    dialogConfig.height = '78%';
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddSignComponent, dialogConfig);
   }
   closeClick() {
 
   }
-  
+
+  deleteClick(sign){
+    this.signService.deleteSignFromDataSet(sign.RoadSignId).subscribe(res=>{
+      this.getAll();
+    })
+  }
   getAll() {
     this.signService.getAllSignsFromDataSet().subscribe(res => {
       this.signsFromDataSet = res;
-      
-      // PhotoFileName
-      // this.PhotoFilePath = this.signService.PhotoUrl + 'znak_stop.png';
 
     });
   }

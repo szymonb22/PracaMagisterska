@@ -10,8 +10,8 @@ export class RoadsignService {
   readonly PhotoUrl = " http://127.0.0.1:8000/dataset/";
   constructor(private http: HttpClient) { }
 
-  addSignToDataSet() {
-
+  addSignToDataSet(sign:RoadSign) {
+    return this.http.post<RoadSign>(this.ApiUrl + 'roadSign/',sign);
   }
 
   editSignFromDataSet() {
@@ -22,7 +22,12 @@ export class RoadsignService {
     return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign');
   }
 
-  deleteSignFromDataSet() {
-
+  deleteSignFromDataSet(id:number) {
+    return this.http.delete<RoadSign>(this.ApiUrl+'roadSign/'+id)
   }
+
+  UploadPhoto(val: any) {
+    return this.http.post(this.ApiUrl + 'SaveFile', val)
+  }
+
 }

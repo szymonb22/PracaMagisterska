@@ -1,15 +1,23 @@
 <div>
-    <h1>znaki drogowe</h1>
-
-    <button mat-raised-button type="button" (click)="addClick()" >
-       Dodaj
+  <h1>znaki drogowe</h1>
+  <div>
+    <div class="addBtn">
+      <button mat-raised-button type="button" (click)="addClick()">
+        <mat-icon class="add_box">add_box</mat-icon> Dodaj
       </button>
-    
-    <div *ngFor = "let sign of signsFromDataSet">
-        <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="200px" alt="">
+    </div>
+
+    <div *ngFor="let sign of signsFromDataSet" >
+      <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
       <div>
         <span>{{sign.RoadSignName}}</span>
-      </div>  
+      </div>
+      <div>
+        <button>edytuj</button>
+        <button (click)="deleteClick(sign)">usuń</button>
+
+      </div>
     </div>
+  </div>
+
 </div>
-  
