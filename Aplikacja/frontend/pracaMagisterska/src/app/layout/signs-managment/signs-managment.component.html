@@ -1,5 +1,5 @@
 <div>
-  <h1>znaki drogowe</h1>
+  <h1 class="header">znaki drogowe w zbiorze danych </h1>
   <div>
     <div class="addBtn">
       <button mat-raised-button type="button" (click)="addClick()">
@@ -12,15 +12,15 @@
         <div>
           <span>{{sign.RoadSignName}}</span>
         </div>
-        <div>
-          <button>edytuj</button>
-          <button (click)="deleteClick(sign)">usuń</button>
-
+        <div class="editDelButton">
+          <button mat-raised-button color="basic">edytuj</button>
+          <div class="delBtn">
+            <button mat-raised-button color="warn" (click)="deleteClick(sign)">usuń</button>
+          </div>
         </div>
-
       </li>
-
     </ul>
+
     <!-- <div *ngFor="let sign of signsFromDataSet" class="mainContainer" >
       <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
       <div>

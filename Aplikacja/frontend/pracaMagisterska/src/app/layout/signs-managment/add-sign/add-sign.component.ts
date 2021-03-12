@@ -41,7 +41,7 @@ export class AddSignComponent implements OnInit {
     this.service.addSignToDataSet(this.Form.value).subscribe(
       res => {
         console.log('added');
-        this.service.getAllSignsFromDataSet().subscribe();
+        this.service.getAllSignsFromDataSet();
         this.dialogRef.close();
       }
     )

@@ -9,9 +9,10 @@ import {routes} from './routes';
 import { MainComponent } from './main/main.component';
 import { SignsManagmentComponent } from './signs-managment/signs-managment.component';
 import { AddSignComponent } from './signs-managment/add-sign/add-sign.component';
+import { EditSignComponent } from './signs-managment/edit-sign/edit-sign.component';
 
 @NgModule({
-  declarations: [LayoutComponent, MainComponent, SignsManagmentComponent, AddSignComponent],
+  declarations: [LayoutComponent, MainComponent, SignsManagmentComponent, AddSignComponent, EditSignComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
