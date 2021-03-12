@@ -7,7 +7,8 @@ import { RoadSign } from '../models/roadsign.model';
 })
 export class RoadsignService {
   readonly ApiUrl = " http://127.0.0.1:8000/";
-  readonly PhotoUrl = " http://127.0.0.1:8000/dataset/";
+  readonly PhotoUrl = "http://127.0.0.1:8000/dataset/";
+
   constructor(private http: HttpClient) { }
 
   addSignToDataSet(sign:RoadSign) {

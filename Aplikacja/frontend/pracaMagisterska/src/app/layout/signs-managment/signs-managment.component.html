@@ -6,8 +6,22 @@
         <mat-icon class="add_box">add_box</mat-icon> Dodaj
       </button>
     </div>
+    <ul class="mainContainer">
+      <li *ngFor="let sign of signsFromDataSet">
+        <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
+        <div>
+          <span>{{sign.RoadSignName}}</span>
+        </div>
+        <div>
+          <button>edytuj</button>
+          <button (click)="deleteClick(sign)">usuń</button>
 
-    <div *ngFor="let sign of signsFromDataSet" >
+        </div>
+
+      </li>
+
+    </ul>
+    <!-- <div *ngFor="let sign of signsFromDataSet" class="mainContainer" >
       <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
       <div>
         <span>{{sign.RoadSignName}}</span>
@@ -17,7 +31,7 @@
         <button (click)="deleteClick(sign)">usuń</button>
 
       </div>
-    </div>
+  </div> -->
   </div>
 
 </div>
