@@ -8,12 +8,12 @@
     </div>
     <ul class="mainContainer">
       <li *ngFor="let sign of signsFromDataSet">
-        <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
+        <img [src]="PhotoFilePath+sign.PhotoFileName" height="300px" width="300px" alt="">
         <div>
           <span>{{sign.RoadSignName}}</span>
         </div>
         <div class="editDelButton">
-          <button mat-raised-button color="basic">edytuj</button>
+          <button mat-raised-button color="basic" (click)="editClick(sign)">edytuj</button>
           <div class="delBtn">
             <button mat-raised-button color="warn" (click)="deleteClick(sign)">usuń</button>
           </div>

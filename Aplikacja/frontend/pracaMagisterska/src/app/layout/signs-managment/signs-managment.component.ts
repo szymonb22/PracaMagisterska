@@ -3,6 +3,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RoadSign } from '../models/roadsign.model';
 import { RoadsignService } from '../services/roadsign.service';
 import { AddSignComponent } from './add-sign/add-sign.component';
+import { EditSignComponent } from './edit-sign/edit-sign.component';
 
 @Component({
   selector: 'app-signs-managment',
@@ -29,14 +30,20 @@ export class SignsManagmentComponent implements OnInit {
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddSignComponent, dialogConfig);
   }
-  closeClick() {
 
-  }
 
   deleteClick(sign){
     this.signService.deleteSignFromDataSet(sign.RoadSignId).subscribe(res=>{
       this.getAll();
     })
+  }
+  editClick(sign){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.width = '40%';
+    dialogConfig.height = '78%';
+    dialogConfig.autoFocus = false;
+    const dialogRef = this.dialog.open(EditSignComponent, dialogConfig);
   }
   getAll() {
     this.signService.getAllSignsFromDataSet().subscribe(res => {
