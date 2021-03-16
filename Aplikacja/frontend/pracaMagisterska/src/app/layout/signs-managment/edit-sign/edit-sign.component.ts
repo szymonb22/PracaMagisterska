@@ -26,6 +26,7 @@ export class EditSignComponent implements OnInit {
 
   ngOnInit(): void {
     this.Form = this.formBuilder.group({
+      RoadSignId: this.signToEdit.RoadSignId,
       RoadSignName: ['', [Validators.required]],
       RoadSignCategory: ['', [Validators.required]],
       PhotoFileName: ['']
@@ -33,6 +34,7 @@ export class EditSignComponent implements OnInit {
     this.PhotoFilePath = this.service.PhotoUrl;
     this.FileName = this.signToEdit.PhotoFileName;
     this.Form.setValue({
+      RoadSignId:this.signToEdit.RoadSignId,
       RoadSignName: this.signToEdit.RoadSignName,
       RoadSignCategory: this.signToEdit.RoadSignCategory,
       PhotoFileName: this.signToEdit.PhotoFileName
@@ -45,7 +47,6 @@ export class EditSignComponent implements OnInit {
       res => {
         console.log('edited');
       }
-
     )
     this.service.getAllSignsFromDataSet();
     this.dialogRef.close();
