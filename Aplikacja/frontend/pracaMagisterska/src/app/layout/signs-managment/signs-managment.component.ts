@@ -14,7 +14,8 @@ export class SignsManagmentComponent implements OnInit {
 
   signsFromDataSet: RoadSign[];
   PhotoFilePath="http://127.0.0.1:8000/dataset/";
-
+  signNameFilter:string="";
+  signListWithoutFilter:any=[];
   constructor(private signService: RoadsignService,
               private dialog: MatDialog) { }
 
@@ -52,7 +53,17 @@ export class SignsManagmentComponent implements OnInit {
   getAll() {
     this.signService.getAllSignsFromDataSet().subscribe(res => {
       this.signsFromDataSet = res;
-
+      this.signListWithoutFilter = res;
     });
+  }
+
+  FilterFn(){
+    var signNameFilter = this.signNameFilter;
+
+    this.signsFromDataSet = this.signListWithoutFilter.filter(function(el){
+      return el.RoadSignName.toString().toLowerCase().includes(
+        signNameFilter.toString().trim().toLowerCase()
+      )
+    });    
   }
 }
