@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RoadSign } from '../../models/roadsign.model';
 import { RoadsignService } from '../../services/roadsign.service';
 
 @Component({
@@ -14,17 +15,29 @@ export class EditSignComponent implements OnInit {
   Form: FormGroup;
   signCategories = ['------', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
   PhotoFilePath: string;
-
+  signToEdit:RoadSign;
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RoadsignService>,
-    private service: RoadsignService) { }
+    private service: RoadsignService,
+    @Inject(MAT_DIALOG_DATA) data) {
+      this.signToEdit = data.sign;
+    }
+ 
 
   ngOnInit(): void {
     this.Form = this.formBuilder.group({
-      RoadSignName: [, [Validators.required]],
+      RoadSignName: ['', [Validators.required]],
       RoadSignCategory: ['', [Validators.required]],
       PhotoFileName: ['']
     });
+    this.PhotoFilePath = this.service.PhotoUrl;
+    this.FileName = this.signToEdit.PhotoFileName;
+    this.Form.setValue({
+      RoadSignName: this.signToEdit.RoadSignName,
+      RoadSignCategory: this.signToEdit.RoadSignCategory,
+      PhotoFileName: this.signToEdit.PhotoFileName
+    });
+
   }
   get f() { return this.Form.controls; }
   editSign() {

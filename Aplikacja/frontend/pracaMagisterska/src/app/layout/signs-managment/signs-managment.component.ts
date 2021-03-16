@@ -43,6 +43,10 @@ export class SignsManagmentComponent implements OnInit {
     dialogConfig.width = '40%';
     dialogConfig.height = '78%';
     dialogConfig.autoFocus = false;
+    dialogConfig.data = {
+      sign: sign
+    };
+  
     const dialogRef = this.dialog.open(EditSignComponent, dialogConfig);
   }
   getAll() {
