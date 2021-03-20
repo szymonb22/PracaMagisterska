@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'RoadSignsApp.apps.RoadsignsappConfig',
-    'rest_framework'
+    'rest_framework',
+    'django_filters'
 ]
 
 CORS_ORIGIN_ALLOW_ALL=True
@@ -77,6 +78,11 @@ TEMPLATES = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKEND':(
+        'django_filters.rest_framework.DjangoFilterBackend',
+    )
+}
 WSGI_APPLICATION = 'BackendAPI.wsgi.application'
 
 
