@@ -16,7 +16,7 @@ export class RoadsignService {
   }
 
   editSignFromDataSet(sign:RoadSign) {
-    return this.http.put<RoadSign>(this.ApiUrl + 'roadSign/',sign);
+    return this.http.put<RoadSign>(this.ApiUrl + 'roadSign/'+sign.RoadSignId,sign);
   }
 
   getAllSignsFromDataSet(): Observable<RoadSign[]> {

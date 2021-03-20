@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RoadSign } from '../models/roadsign.model';
 import { RoadsignService } from '../services/roadsign.service';
@@ -16,6 +17,8 @@ export class SignsManagmentComponent implements OnInit {
   PhotoFilePath="http://127.0.0.1:8000/dataset/";
   signNameFilter:string="";
   signListWithoutFilter:any=[];
+  RoadSignCategory:string;
+  signCategories = ['------', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
   constructor(private signService: RoadsignService,
               private dialog: MatDialog) { }
 

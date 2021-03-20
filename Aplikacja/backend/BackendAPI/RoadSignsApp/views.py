@@ -7,7 +7,7 @@ from RoadSignsApp.models import RoadSigns
 from RoadSignsApp.serializers import RoadSignSerializer
 from django_filters import rest_framework as filters 
 from django.core.files.storage import default_storage
-
+from rest_framework.filters import OrderingFilter
 # Create your views here.
 
 class roadSignList(generics.ListCreateAPIView):
@@ -24,6 +24,10 @@ class roadSignByCategory(generics.ListAPIView):
       serializer_class = RoadSignSerializer
       filter_backends=(filters.DjangoFilterBackend,)
       filterset_fields=('RoadSignCategory',)
+
+# class roadSignList(generics.ListAPIView):
+#       queryset=RoadSigns.objects.all()
+#       serializer_class = RoadSignSerializer
 
 @csrf_exempt
 def SaveFile(request):
