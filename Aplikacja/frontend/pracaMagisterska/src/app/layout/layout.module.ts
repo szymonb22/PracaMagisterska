@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomMaterialModule } from '../custom-material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import {routes} from './routes';
+import { routes } from './routes';
 import { MainComponent } from './main/main.component';
 import { SignsManagmentComponent } from './signs-managment/signs-managment.component';
 import { AddSignComponent } from './signs-managment/add-sign/add-sign.component';
@@ -18,10 +18,10 @@ import { EditSignComponent } from './signs-managment/edit-sign/edit-sign.compone
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forChild(routes),
-    CustomMaterialModule, FormsModule,
-    ReactiveFormsModule
+    CustomMaterialModule,
+    FormsModule,
   ],
-  exports:[
+  exports: [
     LayoutComponent
   ]
 })

@@ -1,20 +1,26 @@
 <div>
   <h1 class="header">znaki drogowe w zbiorze danych </h1>
   <div>
-    <input [(ngModel)]="signNameFilter" class="form-control" (keyup)="FilterFn()" placeholder="Filter" type="text">
-    <!-- <mat-form-field appearance="fill">
+    <div style="display: flex; flex-wrap: wrap;">
+      <mat-form-field appearance="outline" style="justify-content: flex-start; margin-left: 5%;">
+        <input matInput type="text" [(ngModel)]="signNameFilter" class="form-control" (keyup)="FilterFn()"
+          placeholder="Filter" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="justify-content: flex-start; margin-left: 5%;">
         <mat-label>kategoria</mat-label>
-          <mat-select [(ngModel)]="RoadSignCategory">
-              <mat-option *ngFor="let category of signCategories" [value]="category">
-                  {{category}}
-              </mat-option>
-          </mat-select>
-    </mat-form-field>      -->
-    <div class="addBtn">
-      <button mat-raised-button type="button" (click)="addClick()">
-        <mat-icon class="add_box">add_box</mat-icon> Dodaj
-      </button>
+        <mat-select [(ngModel)]="RoadSignCategory">
+          <mat-option *ngFor="let category of signCategories" [value]="category">
+            {{category}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div style="justify-content: flex-end; margin-left: auto; margin-right: 2%;">
+        <button mat-raised-button type="button" (click)="addClick()">
+          <mat-icon class="add_box">add_box</mat-icon> Dodaj
+        </button>
+      </div>
     </div>
+
     <ul class="mainContainer">
       <li *ngFor="let sign of signsFromDataSet">
         <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
