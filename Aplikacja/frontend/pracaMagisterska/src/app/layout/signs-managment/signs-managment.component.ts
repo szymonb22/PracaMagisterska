@@ -23,6 +23,7 @@ export class SignsManagmentComponent implements OnInit {
               private dialog: MatDialog) { }
 
   ngOnInit(): void {
+  
     this.getAll();
   }
 

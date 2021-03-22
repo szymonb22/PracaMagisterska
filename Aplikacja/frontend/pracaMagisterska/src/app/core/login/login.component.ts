@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
     this.service.loginUser(this.Form.value).subscribe(
       res => {
         console.log('logged in');
-        this.route.navigateByUrl('\main');
+        this.route.navigateByUrl('main');
       }
     )
   }

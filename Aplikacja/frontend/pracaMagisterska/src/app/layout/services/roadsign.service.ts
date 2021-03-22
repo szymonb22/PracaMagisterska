@@ -20,7 +20,7 @@ export class RoadsignService {
   }
 
   getAllSignsFromDataSet(): Observable<RoadSign[]> {
-    return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign');
+    return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign',);
   }
 
   deleteSignFromDataSet(id:number) {

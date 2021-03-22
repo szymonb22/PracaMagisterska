@@ -1,8 +1,8 @@
-import {Routes} from '@angular/router';
+import { Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { SignsManagmentComponent } from './signs-managment/signs-managment.component';
-
-export const routes:Routes = [
-    {path:'main',component:MainComponent},
-    {path:'sign',component:SignsManagmentComponent}
+import { AuthGuard } from '../core/guards/auth.guard';
+export const routes: Routes = [
+    { path: 'main', component: MainComponent },
+    { path: 'sign', component: SignsManagmentComponent ,canActivate: [AuthGuard]}
 ]
