@@ -2,25 +2,26 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
-from rest_framework import generics,permissions,viewsets
+from rest_framework import generics, permissions, viewsets
 from RoadSignsApp.models import RoadSigns
 from RoadSignsApp.serializers import RoadSignSerializer, UserSerializer, GroupSerializer
 from django_filters import rest_framework as filters
 from django.core.files.storage import default_storage
 from rest_framework.filters import OrderingFilter
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.contrib.auth.models import User, Group
-
 
 
 # Create your views here.
 
 class roadSignList(generics.ListCreateAPIView):
+    authentication_classes = [SessionAuthentication,
+                              BasicAuthentication, JWTAuthentication]
+    permission_classes = (IsAuthenticatedOrReadOnly,)
     queryset = RoadSigns.objects.all().order_by('-RoadSignName')
     serializer_class = RoadSignSerializer
-    authentication_classes = (TokenAuthentication,)
-    permission_classes =(IsAuthenticated,)
 
 class roadSignAction(generics.RetrieveUpdateDestroyAPIView):
     queryset = RoadSigns.objects.all()
@@ -50,6 +51,7 @@ def SaveFile(request):
 class newUser(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class UserDetails(generics.RetrieveUpdateDestroyAPIView):
 

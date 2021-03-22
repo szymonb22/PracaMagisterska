@@ -12,12 +12,12 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
-
+import datetime
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/dataset/'
-MEDIA_ROOT = os.path.join(BASE_DIR,"dataset")
+MEDIA_ROOT = os.path.join(BASE_DIR, "dataset")
 
 
 # Quick-start development settings - unsuitable for production
@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django_filters'
 ]
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -80,15 +80,28 @@ TEMPLATES = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKEND':(
+    'DEFAULT_FILTER_BACKEND': (
         'django_filters.rest_framework.DjangoFilterBackend',
-        
+
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     # 'PAGE_SIZE': 5
 }
+
 WSGI_APPLICATION = 'BackendAPI.wsgi.application'
 
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(seconds=500),
+    'ROTATE_REFRESH_TOKENS': True,
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases

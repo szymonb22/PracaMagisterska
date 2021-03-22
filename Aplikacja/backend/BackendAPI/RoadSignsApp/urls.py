@@ -19,6 +19,6 @@ urlpatterns = [
     url('', include(router.urls)),
     url(r'users', views.newUser.as_view()),
     url(r'users/(?P<pk>[0-9]+)$', views.UserDetails.as_view()),
-    url(r'auth/', ObtainAuthToken.as_view())
+    
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
