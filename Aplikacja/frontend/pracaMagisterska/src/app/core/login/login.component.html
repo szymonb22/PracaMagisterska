@@ -1,0 +1,32 @@
+<mat-card>
+    <mat-card-title>Logowanie</mat-card-title>
+    <mat-card-content>
+        <div>
+            <form autocomplete="on" [formGroup]="Form" class="form">
+                <div>
+                    <mat-form-field>
+                        <mat-label>Login</mat-label>
+                        <input matInput type="text" formControlName="username">
+                        <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Hasło</mat-label>
+                        <input matInput type="password" formControlName="password">
+                        <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+            </form>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="justify-content: flex-start;">
+                    <button mat-raised-button (click)="register()">zajerestruj</button>
+                </div>
+                <div style="justify-content: flex-end;">
+                    <button mat-raised-button (click)="login()">zaloguj się</button>
+                </div>
+            </div>
+
+        </div>
+    </mat-card-content>
+</mat-card>
