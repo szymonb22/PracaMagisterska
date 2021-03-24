@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { RoadSign } from '../models/roadsign.model';
 import { RoadsignService } from '../services/roadsign.service';
@@ -11,6 +10,7 @@ import { EditSignComponent } from './edit-sign/edit-sign.component';
   templateUrl: './signs-managment.component.html',
   styleUrls: ['./signs-managment.component.scss']
 })
+
 export class SignsManagmentComponent implements OnInit {
 
   signsFromDataSet: RoadSign[];
@@ -69,5 +69,14 @@ export class SignsManagmentComponent implements OnInit {
         signNameFilter.toString().trim().toLowerCase()
       )
     });    
+  }
+
+  getByCategory(category:string){
+    this.signService.getSignsByCategory(category).subscribe(
+      res=>{
+        this.signsFromDataSet = res;
+        this.signListWithoutFilter = res;
+      }
+    )
   }
 }

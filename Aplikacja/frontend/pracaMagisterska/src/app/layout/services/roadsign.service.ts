@@ -11,24 +11,28 @@ export class RoadsignService {
 
   constructor(private http: HttpClient) { }
 
-  addSignToDataSet(sign:RoadSign) {
-    return this.http.post<RoadSign>(this.ApiUrl + 'roadSign/',sign);
+  addSignToDataSet(sign: RoadSign) {
+    return this.http.post<RoadSign>(this.ApiUrl + 'roadSign/', sign);
   }
 
-  editSignFromDataSet(sign:RoadSign) {
-    return this.http.put<RoadSign>(this.ApiUrl + 'roadSign/'+sign.RoadSignId,sign);
+  editSignFromDataSet(sign: RoadSign) {
+    return this.http.put<RoadSign>(this.ApiUrl + 'roadSign/' + sign.RoadSignId, sign);
   }
 
   getAllSignsFromDataSet(): Observable<RoadSign[]> {
-    return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign',);
+    return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign');
   }
 
-  deleteSignFromDataSet(id:number) {
-    return this.http.delete<RoadSign>(this.ApiUrl+'roadSign/'+id)
+  deleteSignFromDataSet(id: number) {
+    return this.http.delete<RoadSign>(this.ApiUrl + 'roadSign/' + id)
   }
 
   UploadPhoto(val: any) {
     return this.http.post(this.ApiUrl + 'SaveFile', val)
+  }
+
+  getSignsByCategory(category: string):Observable<RoadSign[]> {
+    return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign/category/?RoadSignCategory='+category);
   }
 
 }

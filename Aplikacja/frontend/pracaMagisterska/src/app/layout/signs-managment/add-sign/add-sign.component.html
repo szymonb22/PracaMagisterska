@@ -1,6 +1,5 @@
 <div>
     <mat-icon class="close-icon" (click)="handleDialogClose()">close</mat-icon>
-
     <h1>Dodaj znak</h1>
     <div class="content">
         <form autocomplete="on" [formGroup]="Form" class="form">
@@ -15,13 +14,11 @@
                 <mat-form-field appearance="fill">
                     <mat-label>kategoria</mat-label>
                     <mat-select formControlName="RoadSignCategory">
-                        <!--required-->
-
                         <mat-option *ngFor="let category of signCategories" [value]="category">
                             {{category}}
                         </mat-option>
                     </mat-select>
-                    <!-- <mat-error *ngIf="animalControl.hasError('required')">Please choose an animal</mat-error> -->
+                    <mat-error *ngIf="f.RoadSignCategory.invalid">{{getErrorMessage()}}</mat-error>
                 </mat-form-field>
             </div>
             <div>
@@ -33,7 +30,6 @@
                 </div>
             </div>
         </form>
-
         <div class="add">
             <button [disabled]="!Form.valid" mat-raised-button (click)="AddSign()">Dodaj</button>
         </div>

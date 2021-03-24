@@ -26,14 +26,30 @@ export class LoginComponent implements OnInit {
 
     });
   }
-  login() {
-    this.service.loginUser(this.Form.value).subscribe(
-      res => {
-        console.log('logged in');
-        this.route.navigateByUrl('main');
-      }
-    )
+
+  
+  get f() { return this.Form.controls; }
+
+  getErrorMessage() {
+    if (this.f.username.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.password.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
   }
+
+  login() {
+    if(this.Form.valid){
+      this.service.loginUser(this.Form.value).subscribe(
+        res => {
+          console.log('logged in');
+          this.route.navigateByUrl('main');
+        }
+      )
+    }
+  }
+  
   register() {
     this.route.navigateByUrl('register');
   }

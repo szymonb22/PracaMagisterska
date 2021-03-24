@@ -29,13 +29,43 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
   }
-  register() {
-    this.service.registerUser(this.Form.value).subscribe(
-      res => {
-        console.log('added');
-        this.route.navigateByUrl('\login');
-      }
-    )
+
+  get f() { return this.Form.controls; }
+
+  getErrorMessage() {
+    if (this.f.username.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.password.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.password2.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.first_name.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.last_name.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
+    if (this.f.email.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
   }
 
+  register() {
+    if(this.Form.valid){
+      this.service.registerUser(this.Form.value).subscribe(
+        res => {
+          console.log('added');
+          this.route.navigateByUrl('\login');
+        }
+      )
+    }
+
+  }
+
+  login(){
+    this.route.navigateByUrl('\login');
+  }
 }

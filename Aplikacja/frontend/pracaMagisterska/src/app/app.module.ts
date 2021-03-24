@@ -24,7 +24,11 @@ import { JwtInterceptor } from '../app/core/interceptors/Jwt.Interceptor';
     FormsModule,
     LayoutModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },],
+  providers: [
+    { provide: HTTP_INTERCEPTORS,
+    useClass: JwtInterceptor,
+    multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
