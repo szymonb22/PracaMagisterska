@@ -4,7 +4,8 @@ from rest_framework.parsers import JSONParser
 from django.http.response import JsonResponse
 from rest_framework import generics, permissions, viewsets
 from RoadSignsApp.models import RoadSigns
-from RoadSignsApp.serializers import RoadSignSerializer, UserSerializer, GroupSerializer
+from RoadSignsApp.serializers import RoadSignSerializer, UserSerializer, GroupSerializer,RegisterSerializer
+
 from django_filters import rest_framework as filters
 from django.core.files.storage import default_storage
 from rest_framework.filters import OrderingFilter
@@ -50,8 +51,8 @@ def SaveFile(request):
 
 class newUser(generics.CreateAPIView):
     queryset = User.objects.all()
-    serializer_class = UserSerializer
-
+    serializer_class = RegisterSerializer
+    permissions_classes = [permissions.AllowAny]
 
 class UserDetails(generics.RetrieveUpdateDestroyAPIView):
 

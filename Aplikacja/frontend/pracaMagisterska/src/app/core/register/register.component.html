@@ -20,11 +20,33 @@
                 </div>
                 <div>
                     <mat-form-field>
+                        <mat-label>Powtórz Hasło</mat-label>
+                        <input matInput type="password2" formControlName="password2">
+                        <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
                         <mat-label>Email</mat-label>
                         <input matInput type="email" formControlName="email">
                         <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
                     </mat-form-field>
                 </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Imie</mat-label>
+                        <input matInput type="text" formControlName="first_name">
+                        <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>Nazwisko</mat-label>
+                        <input matInput type="text" formControlName="last_name">
+                        <!-- <mat-error *ngIf="f.RoadSignName.invalid">{{getErrorMessage()}}</mat-error> -->
+                    </mat-form-field>
+                </div>
+
             </form>
             <div>
                 <button mat-raised-button (click)="register()">zajerestruj</button>
