@@ -1,8 +1,8 @@
 <div>
     <mat-toolbar color="primary">
         <span>Praca</span>
-
         <div class="logoutBtn">
+            <span class="username">{{currentUserName}}</span>
             <button (click)="logOut()" mat-raised-button>
                 wyloguj się
             </button>

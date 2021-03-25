@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
       password2: ['', [Validators.required]],
       first_name: ['', [Validators.required]],
       last_name: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]]
+      email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]]
     });
   }
 
@@ -48,9 +48,13 @@ export class RegisterComponent implements OnInit {
     if (this.f.last_name.hasError('required')) {
       return 'To pole jest wymagane';
     }
+    if (this.f.email.hasError('pattern')) {
+      return 'Podany adres email jest nie prawidłowy';
+    }
     if (this.f.email.hasError('required')) {
       return 'To pole jest wymagane';
     }
+
   }
 
   register() {
@@ -59,6 +63,9 @@ export class RegisterComponent implements OnInit {
         res => {
           console.log('added');
           this.route.navigateByUrl('\login');
+        },
+        err=>{
+          console.log(err);
         }
       )
     }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { RoadSign } from '../models/roadsign.model';
 import { RoadsignService } from '../services/roadsign.service';
 import { AddSignComponent } from './add-sign/add-sign.component';
@@ -20,7 +21,8 @@ export class SignsManagmentComponent implements OnInit {
   RoadSignCategory:string;
   signCategories = ['------', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
   constructor(private signService: RoadsignService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private route:Router) { }
 
   ngOnInit(): void {
   
@@ -78,5 +80,9 @@ export class SignsManagmentComponent implements OnInit {
         this.signListWithoutFilter = res;
       }
     )
+  }
+
+  goBack(){
+    this.route.navigateByUrl('main');
   }
 }

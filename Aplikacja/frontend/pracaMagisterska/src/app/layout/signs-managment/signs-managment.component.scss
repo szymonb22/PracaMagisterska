@@ -33,3 +33,29 @@ li {
 .delBtn{
     margin-left:55px;
 }
+
+.filterPanel{
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.filterByName{
+   justify-content: flex-start;
+   margin-left: 5%;
+}
+
+.filterByCategory{
+    justify-content: flex-start;
+    margin-left: 5%;
+}
+
+.addSignBtn{
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 2%; 
+}
+
+.goBackBtn{
+    height: fit-content;
+    margin-left: 2%;
+}

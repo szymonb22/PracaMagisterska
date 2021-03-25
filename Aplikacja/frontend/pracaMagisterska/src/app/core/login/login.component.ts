@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
 
   Form: FormGroup;
+  errorInfo: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  
+
   get f() { return this.Form.controls; }
 
   getErrorMessage() {
@@ -40,16 +41,18 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.Form.valid){
+    if (this.Form.valid) {
       this.service.loginUser(this.Form.value).subscribe(
         res => {
-          console.log('logged in');
           this.route.navigateByUrl('main');
+        },
+        err => {
+          this.errorInfo = "Wprowadziłeś zły login lub hasło" 
         }
       )
     }
   }
-  
+
   register() {
     this.route.navigateByUrl('register');
   }

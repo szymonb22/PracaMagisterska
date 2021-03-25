@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../core/models/user.model';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -8,14 +9,22 @@ import { AuthService } from '../core/services/auth.service';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-
-  constructor(private authService:AuthService,
-              private router:Router
-              ) { }
+  @Input() currentUser;
+  currentUserName: string;
+  
+  constructor(private authService: AuthService,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
+    this.authService.getUserById(this.currentUser.user_id).subscribe(
+        res=>{
+          this.currentUserName = res.username
+        }
+    );
   }
-  logOut(){
+
+  logOut() {
     this.authService.logout();
     this.router.navigateByUrl('login');
   }

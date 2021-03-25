@@ -42,8 +42,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 
-
-
 class RoadSignSerializer(serializers.ModelSerializer):
     class Meta:
         model = RoadSigns
@@ -61,6 +59,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     def Create(self,validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

@@ -18,6 +18,7 @@
                     </mat-form-field>
                 </div>
             </form>
+            <mat-error *ngIf="errorInfo">{{errorInfo}}</mat-error>
             <div class="buttonGroup">
                 <div class="registerBtn">
                     <button mat-raised-button (click)="register()">zajerestruj</button>
@@ -26,7 +27,6 @@
                     <button mat-raised-button (click)="login()">zaloguj się</button>
                 </div>
             </div>
-
         </div>
     </mat-card-content>
 </mat-card>
