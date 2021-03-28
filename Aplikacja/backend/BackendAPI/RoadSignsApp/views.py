@@ -17,8 +17,11 @@ class roadSignList(generics.ListCreateAPIView):
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = [SessionAuthentication,
                               BasicAuthentication, JWTAuthentication]
-    queryset = RoadSigns.objects.all().order_by('-RoadSignName')
+    queryset = RoadSigns.objects.all()
+    # .order_by('-RoadSignName')
     serializer_class = RoadSignSerializer
+    ordering_fields = ('RoadSignName',)
+    ordering = ('-RoadSignName',)
 
 class roadSignAction(generics.RetrieveUpdateDestroyAPIView):
     queryset = RoadSigns.objects.all()
