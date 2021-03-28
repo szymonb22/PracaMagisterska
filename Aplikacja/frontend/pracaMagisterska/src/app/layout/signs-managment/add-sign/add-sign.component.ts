@@ -1,24 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RoadsignService } from '../../services/roadsign.service';
+import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-sign',
   templateUrl: './add-sign.component.html',
   styleUrls: ['./add-sign.component.scss']
 })
+
 export class AddSignComponent implements OnInit {
 
   FileName: string;
   Form: FormGroup;
-  signCategories = ['------', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
+  signCategories = ['', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
   PhotoFilePath: string;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
 
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RoadsignService>,
-    private service: RoadsignService
+    private service: RoadsignService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
@@ -36,16 +41,29 @@ export class AddSignComponent implements OnInit {
     if (this.f.RoadSignName.hasError('required')) {
       return 'To pole jest wymagane';
     }
+
+    if (this.f.RoadSignCategory.hasError('required')) {
+      return 'To pole jest wymagane';
+    }
   }
+
   AddSign() {
     this.service.addSignToDataSet(this.Form.value).subscribe(
       res => {
-        console.log('added');
+        this._snackBar.open('pomyślnie dodano znak ' + this.Form.value.RoadSignName, '', {
+          duration: 2500,
+          horizontalPosition: this.horizontalPosition,
+          verticalPosition: this.verticalPosition,
+        });
         this.service.getAllSignsFromDataSet();
         this.dialogRef.close();
+      },
+      err=>{
+        console.log(err);
       }
     )
   }
+
   handleDialogClose() {
     this.dialogRef.close();
   }

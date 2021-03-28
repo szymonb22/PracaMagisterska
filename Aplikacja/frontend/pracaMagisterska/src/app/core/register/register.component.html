@@ -20,15 +20,17 @@
                 <div>
                     <mat-form-field>
                         <mat-label>Powtórz Hasło</mat-label>
-                        <input matInput type="password2" formControlName="password2">
-                        <mat-error *ngIf="f.password2.invalid">{{getErrorMessage()}}</mat-error>
+                        <input matInput type="password" formControlName="password2">
+                        <mat-error *ngIf="f.password2.invalid && !f.password2.errors?.passwordMismatch">{{getErrorMessage()}}</mat-error>
+                       <mat-error *ngIf="Form.get('password2').touched && Form.get('password2').errors?.passwordMismatch">Hasła
+                        nie są takie same</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
                     <mat-form-field>
                         <mat-label>Email</mat-label>
                         <input matInput type="email" formControlName="email">
-                        <mat-error *ngIf="f.email.invalid">{{getErrorMessage()}}</mat-error>
+                        <mat-error *ngIf="f.email.invalid">{{getErrorEmailMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
                 <div>
@@ -45,6 +47,7 @@
                         <mat-error *ngIf="f.last_name.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
+                <div class="err" *ngIf="error">{{error}} </div>
             </form>
             <div class="buttonGroup">
                 <div class="registerBtn">

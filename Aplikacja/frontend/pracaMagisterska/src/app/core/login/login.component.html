@@ -17,8 +17,8 @@
                         <mat-error *ngIf="f.password.invalid">{{getErrorMessage()}}</mat-error>
                     </mat-form-field>
                 </div>
+                <mat-error *ngIf="errorInfo">{{errorInfo}}</mat-error>
             </form>
-            <mat-error *ngIf="errorInfo">{{errorInfo}}</mat-error>
             <div class="buttonGroup">
                 <div class="registerBtn">
                     <button mat-raised-button (click)="register()">zajerestruj</button>
