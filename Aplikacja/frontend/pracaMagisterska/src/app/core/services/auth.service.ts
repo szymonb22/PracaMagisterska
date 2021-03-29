@@ -37,10 +37,6 @@ export class AuthService {
       )
     // .subscribe( data => console.log('data'), error => console.log('error'))
   }
-
-  registerUser(user: User) {
-    return this.http.post<User>(`${environment.apiUrl}`+'register/', user);
-  }
   
   refreshToken() {
     console.log('this.currentUserValue.refreshToken')
@@ -66,9 +62,6 @@ export class AuthService {
     // .subscribe( data => console.log('data'), error => console.warn(error))
   }
 
-  getUserById(id){
-    return this.http.get<User>(`${environment.apiUrl}`+'users/'+id)
-  }
   logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');

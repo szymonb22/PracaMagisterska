@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { RoadsignService } from '../../services/roadsign.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { RoadSignSandbox } from 'src/app/core/sandboxes/RoadSign.sandbox';
 
 @Component({
   selector: 'app-add-sign',
@@ -19,15 +20,14 @@ export class AddSignComponent implements OnInit {
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
-
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<RoadsignService>,
     private service: RoadsignService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private sandbox: RoadSignSandbox
   ) { }
 
   ngOnInit(): void {
-
     this.Form = this.formBuilder.group({
       RoadSignName: ['', [Validators.required]],
       RoadSignCategory: ['', [Validators.required]],
@@ -48,7 +48,7 @@ export class AddSignComponent implements OnInit {
   }
 
   AddSign() {
-    this.service.addSignToDataSet(this.Form.value).subscribe(
+    this.sandbox.addSign(this.Form.value).subscribe(
       res => {
         this._snackBar.open('pomyślnie dodano znak ' + this.Form.value.RoadSignName, '', {
           duration: 2500,
@@ -58,7 +58,7 @@ export class AddSignComponent implements OnInit {
         this.service.getAllSignsFromDataSet();
         this.dialogRef.close();
       },
-      err=>{
+      err => {
         console.log(err);
       }
     )

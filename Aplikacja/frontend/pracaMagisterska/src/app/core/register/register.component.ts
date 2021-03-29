@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { UserSandbox } from '../sandboxes/User.sandbox';
 
 @Component({
   selector: 'app-register',
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: Router,
-    private service: AuthService,
+    private sanbox: UserSandbox,
     private _snackBar: MatSnackBar
   ) { }
 
@@ -44,7 +44,6 @@ export class RegisterComponent implements OnInit {
   }
 
   get f() { return this.Form.controls; }
-
 
   getErrorEmailMessage() {
     if (this.f.email.hasError('required')) {
@@ -72,6 +71,7 @@ export class RegisterComponent implements OnInit {
     if (this.f.first_name.hasError('required')) {
       return 'To pole jest wymagane';
     }
+
     if (this.f.last_name.hasError('required')) {
       return 'To pole jest wymagane';
     }
@@ -91,8 +91,8 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.Form.valid) {
-      this.service.registerUser(this.Form.value).subscribe(
-        () => {
+      this.sanbox.newUser(this.Form.value).subscribe(
+        (res) => {
           this._snackBar.open('pomyślnie zajerejstrowano użytkownika ' + this.Form.value.username, '', {
             duration: 2500,
             horizontalPosition: this.horizontalPosition,
@@ -105,7 +105,6 @@ export class RegisterComponent implements OnInit {
         }
       )
     }
-
   }
 
   login() {

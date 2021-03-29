@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RoadSign } from '../../models/roadsign.model';
 import { RoadsignService } from '../../services/roadsign.service';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { RoadSignSandbox } from 'src/app/core/sandboxes/RoadSign.sandbox';
 
 @Component({
   selector: 'app-edit-sign',
@@ -18,7 +19,6 @@ export class EditSignComponent implements OnInit {
   signCategories = ['', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
   PhotoFilePath: string;
   signToEdit:RoadSign;
-
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -26,11 +26,11 @@ export class EditSignComponent implements OnInit {
     private dialogRef: MatDialogRef<RoadsignService>,
     private service: RoadsignService,
     private _snackBar: MatSnackBar,
+    private sandbox:RoadSignSandbox,
     @Inject(MAT_DIALOG_DATA) data) {
       this.signToEdit = data.sign;
     }
  
-
   ngOnInit(): void {
 
     this.Form = this.formBuilder.group({
@@ -48,7 +48,6 @@ export class EditSignComponent implements OnInit {
       RoadSignCategory: this.signToEdit.RoadSignCategory,
       PhotoFileName: this.signToEdit.PhotoFileName
     });
-
   }
 
   get f() { return this.Form.controls; }
@@ -64,9 +63,9 @@ export class EditSignComponent implements OnInit {
   }
  
   editSign() {
-    this.service.editSignFromDataSet(this.Form.value).subscribe(
+    this.sandbox.editSign(this.signToEdit.RoadSignId,this.Form.value).subscribe(
       res => {
-        this._snackBar.open('pomyślnie dodano znak ' + this.Form.value.RoadSignName, '', {
+        this._snackBar.open('pomyślnie zeedytowano znak ' + this.Form.value.RoadSignName, '', {
           duration: 2500,
           horizontalPosition: this.horizontalPosition,
           verticalPosition: this.verticalPosition,
@@ -78,7 +77,6 @@ export class EditSignComponent implements OnInit {
     )
     this.service.getAllSignsFromDataSet();
     this.dialogRef.close();
-
   }
 
   handleDialogClose() {
@@ -91,7 +89,6 @@ export class EditSignComponent implements OnInit {
     formData.append('uploadedFile', file, file.name);
     this.Form.get('PhotoFileName').setValue(file.name);
     this.service.UploadPhoto(formData).subscribe((data: any) => {
-
       this.FileName = data.toString();
       this.PhotoFilePath = this.service.PhotoUrl;
     })

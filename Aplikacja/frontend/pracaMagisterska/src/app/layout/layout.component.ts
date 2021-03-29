@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../core/models/user.model';
+import { UserSandbox } from '../core/sandboxes/User.sandbox';
 import { AuthService } from '../core/services/auth.service';
 
 @Component({
@@ -11,16 +11,19 @@ import { AuthService } from '../core/services/auth.service';
 export class LayoutComponent implements OnInit {
   @Input() currentUser;
   currentUserName: string;
-  
+
   constructor(private authService: AuthService,
-              private router: Router
+    private sandbox: UserSandbox,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    this.authService.getUserById(this.currentUser.user_id).subscribe(
-        res=>{
-          this.currentUserName = res.username
+    this.sandbox.getUser(this.currentUser.user_id).subscribe(
+      res => {
+        if (res.userDetail !== null) {
+          this.currentUserName = res.userDetail.username;
         }
+      }
     );
   }
 
