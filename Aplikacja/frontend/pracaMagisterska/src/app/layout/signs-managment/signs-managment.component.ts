@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoadSign } from '../models/roadsign.model';
 import { AddSignComponent } from './add-sign/add-sign.component';
 import { EditSignComponent } from './edit-sign/edit-sign.component';
 import { RoadSignSandbox } from '../../core/sandboxes/RoadSign.sandbox';
+import { RoadsignService } from '../services/roadsign.service';
 
 @Component({
   selector: 'app-signs-managment',
@@ -14,19 +15,23 @@ import { RoadSignSandbox } from '../../core/sandboxes/RoadSign.sandbox';
 
 export class SignsManagmentComponent implements OnInit {
 
+  searchRequest: string;
   signsFromDataSet: RoadSign[];
   PhotoFilePath = "http://127.0.0.1:8000/dataset/";
   signNameFilter: string = "";
+  tooltipContent = "wróć";
   signListWithoutFilter: any = [];
   RoadSignCategory: string;
   signCategories = ['', 'ostrzegawcze', 'zakazu', 'nakazu', 'informacyjne'];
 
   constructor(private dialog: MatDialog,
     private route: Router,
-    private signSandbox: RoadSignSandbox) { }
+    private signSandbox: RoadSignSandbox,
+    private signService:RoadsignService,
+    ) { }
 
   ngOnInit(): void {
-
+ 
     this.getAll();
   }
 
@@ -91,5 +96,14 @@ export class SignsManagmentComponent implements OnInit {
 
   goBack() {
     this.route.navigateByUrl('main');
+  }
+
+  search(){
+    this.searchRequest = this.signNameFilter
+    console.log(this.searchRequest)
+    this.signService.searchRoadSigns(this.searchRequest).subscribe(
+      res => this.signsFromDataSet = res,
+      
+    )
   }
 }

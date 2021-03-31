@@ -35,4 +35,11 @@ export class RoadsignService {
     return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign/category/?RoadSignCategory='+category);
   }
 
+  getPagedRoadSigns(page:number):Observable<RoadSign[]>{
+    return this.http.get<RoadSign[]>(this.ApiUrl + 'pagedRoadSign/?page='+page);
+  }
+  
+  searchRoadSigns(name:string):Observable<RoadSign[]>{
+    return this.http.get<RoadSign[]>(this.ApiUrl + 'searchRoadSign/?search='+name);
+  }
 }
