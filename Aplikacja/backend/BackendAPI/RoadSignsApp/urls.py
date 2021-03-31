@@ -15,9 +15,10 @@ urlpatterns = [
     url(r'^roadSign/(?P<pk>[0-9]+)$', views.roadSignAction.as_view()),
     url(r'^roadSign/category/$', views.roadSignByCategory.as_view()),
     url(r'^SaveFile$', views.SaveFile),
+    url(r'^pagedRoadSign/$',views.pagedList.as_view()),
     url('', include(router.urls)),
     url(r'register', views.newUser.as_view()),
     url(r'users/(?P<pk>[0-9]+)$', views.UserDetails.as_view()),
-    
+    url(r'searchRoadSign/$',views.SearchRoadSign.as_view())
 
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

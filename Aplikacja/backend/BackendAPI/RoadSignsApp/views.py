@@ -7,28 +7,27 @@ from RoadSignsApp.models import RoadSigns
 from RoadSignsApp.serializers import RoadSignSerializer, UserSerializer, GroupSerializer,RegisterSerializer
 from django_filters import rest_framework as filters
 from django.core.files.storage import default_storage
-from rest_framework.filters import OrderingFilter
+from rest_framework.filters import OrderingFilter,SearchFilter
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.contrib.auth.models import User, Group
-
+from rest_framework.pagination import PageNumberPagination
 
 class roadSignList(generics.ListCreateAPIView):
     permissions_classes = [permissions.IsAuthenticated]
     authentication_classes = [SessionAuthentication,
                               BasicAuthentication, JWTAuthentication]
     queryset = RoadSigns.objects.all()
-    # .order_by('-RoadSignName')
     serializer_class = RoadSignSerializer
-    ordering_fields = ('RoadSignName',)
-    ordering = ('-RoadSignName',)
+    filter_backends = [OrderingFilter]
+    ordering_fields = ['RoadSignName',]
+    ordering = ('RoadSignName',)
 
 class roadSignAction(generics.RetrieveUpdateDestroyAPIView):
     queryset = RoadSigns.objects.all()
     serializer_class = RoadSignSerializer
     lookup_fields = 'RoadSignId'
     permissions_classes = [permissions.IsAuthenticated]
-
 
 class roadSignByCategory(generics.ListAPIView):
     queryset = RoadSigns.objects.all()
@@ -37,10 +36,14 @@ class roadSignByCategory(generics.ListAPIView):
     filterset_fields = ('RoadSignCategory',)
     permissions_classes = [permissions.IsAuthenticated]
 
-# class roadSignList(generics.ListAPIView):
-#       queryset=RoadSigns.objects.all()
-#       serializer_class = RoadSignSerializer
+class SmallPagesPagination(PageNumberPagination):  
+    page_size = 6
 
+class pagedList(generics.ListAPIView):
+    queryset = RoadSigns.objects.all()
+    serializer_class = RoadSignSerializer
+    pagination_class = SmallPagesPagination
+    permissions_classes = [permissions.IsAuthenticated]
 
 @csrf_exempt
 def SaveFile(request):
@@ -48,7 +51,6 @@ def SaveFile(request):
     file_name = default_storage.save(file.name, file)
 
     return JsonResponse(file_name, safe=False)
-
 
 class newUser(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -60,8 +62,14 @@ class UserDetails(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-
 class GroupViewSet(viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class SearchRoadSign(generics.ListAPIView):
+    queryset = RoadSigns.objects.all()
+    serializer_class = RoadSignSerializer
+    filter_backends = [SearchFilter,OrderingFilter]
+    search_fields= ['RoadSignName',]
+    permissions_classes = [permissions.IsAuthenticated]
