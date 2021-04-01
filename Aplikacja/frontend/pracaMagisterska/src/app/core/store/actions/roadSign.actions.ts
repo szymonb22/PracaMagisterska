@@ -21,6 +21,10 @@ export const GET_BY_CATEGORY_START = "[RoadSigns] GET_BY_CATEGORY_START";
 export const GET_BY_CATEGORY_SUCCESS = "[RoadSigns] GET_BY_CATEGORY_SUCCESS";
 export const GET_BY_CATEGORY_FAILED = "[RoadSigns] GET_BY_CATEGORY_FAILED";
 
+export const SEARCH_SIGN_START = "[RoadSign] SEARCH_SIGN_START";
+export const SEARCH_SIGN_SUCCESS = "[RoadSign] SEARCH_SIGN_SUCCESS";
+export const SEARCH_SIGN_FAILED = "[RoadSign] SEARCH_SIGN_FAILED";
+
 export class GetAllSignsStart implements Action {
     readonly type = GET_ALL_ROAD_SIGNS_START;
 }
@@ -95,7 +99,21 @@ export class GetSignsByCategoryFailed implements Action {
     constructor(public payload: any) { }
 }
 
+export class SearchSignStart implements Action {
+    readonly type = SEARCH_SIGN_START;
+    constructor(public name: string) { }
+}
+
+export class SearchSignSuccess implements Action {
+    readonly type = SEARCH_SIGN_SUCCESS;
+    constructor(public searchResults: RoadSign[]) { }
+}
+
+export class SearchSignFailed implements Action {
+    readonly type = SEARCH_SIGN_FAILED;
+    constructor(public payload: any) { }
+}
 export type RoadSignsActions = GetAllSignsStart | GetAllSignsSuccess | GetAllSignsFailed | GetSignsByCategoryStart | GetSignsByCategorySuccess 
     | GetSignsByCategoryFailed | AddSignStart | AddSignSuccess | AddSignFailed | EditSignStart | EditSignSuccess | EditSignFailed 
-    | RemoveSignStart | RemoveSignSuccess | RemoveSignFailed;
+    | RemoveSignStart | RemoveSignSuccess | RemoveSignFailed | SearchSignStart | SearchSignSuccess | SearchSignFailed;
     

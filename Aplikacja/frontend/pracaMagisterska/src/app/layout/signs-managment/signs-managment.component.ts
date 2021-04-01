@@ -101,7 +101,7 @@ export class SignsManagmentComponent implements OnInit {
   search(){
     this.searchRequest = this.signNameFilter
     console.log(this.searchRequest)
-    this.signService.searchRoadSigns(this.searchRequest).subscribe(
+    this.signSandbox.searchSign(this.searchRequest).subscribe(
       res => this.signsFromDataSet = res,
       
     )

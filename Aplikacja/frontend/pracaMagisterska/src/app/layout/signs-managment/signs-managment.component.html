@@ -2,16 +2,14 @@
   <h1 class="header">znaki drogowe w zbiorze danych </h1>
   <div>
     <div class="filterPanel">
-      <button [matTooltip]="tooltipContent" class="goBackBtn" mat-raised-button (click)="goBack()"><span class="material-icons">
+      <span [matTooltip]="tooltipContent" class="goBackBtn material-icons" (click)="goBack()">
         arrow_back
-        </span></button>
+      </span>
       <mat-form-field appearance="outline" class="filterByName">
-        <input matInput type="text" [(ngModel)]="signNameFilter" class="form-control" 
-         (keyup)="search()" placeholder="Szukaj" type="text">
-          <!-- (keyup)="FilterFn()" -->
- 
-        </mat-form-field>
-      <mat-form-field appearance="outline"class="filterByCategory">
+        <input matInput type="text" [(ngModel)]="signNameFilter" class="form-control" (keyup)="search()"
+          placeholder="Szukaj" type="text">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="filterByCategory">
         <mat-label>kategoria</mat-label>
         <mat-select [(ngModel)]="RoadSignCategory">
           <mat-option (click)="getByCategory(category)" *ngFor="let category of signCategories" [value]="category">

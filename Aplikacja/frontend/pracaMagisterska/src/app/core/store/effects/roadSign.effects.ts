@@ -67,6 +67,16 @@ export class RoadSignEffects {
         })
     ));
 
+    searchSign$ = createEffect(() => this.actions$.pipe(
+        ofType(RoadSignsActions.SEARCH_SIGN_START),
+        switchMap((action: RoadSignsActions.SearchSignStart) => {
+            return this.roadSignService.searchRoadSigns(action.name).pipe(
+                map((roadSigns) => new RoadSignsActions.SearchSignSuccess(roadSigns)),
+                catchError((error: string) => of(new RoadSignsActions.SearchSignFailed(error)))
+            );
+        }))
+    );
+
     constructor(
         private actions$: Actions,
         private roadSignService: RoadsignService

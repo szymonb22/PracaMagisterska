@@ -7,12 +7,14 @@ export interface State {
     loading: boolean;
     loadded: boolean;
     editSign: RoadSign;
+    searchSign: RoadSign[];
 }
 
 const initialState = {
     allRoadSigns: [],
     newSign: null,
     signByCategory: [],
+    searchSign: [],
     editSign: null,
     loading: false,
     loadded: false
@@ -95,6 +97,20 @@ export function RoadSignReducer(state: State = initialState, action: RoadSignsAc
                 ...state
             };
         }
+        case RoadSignsActions.SEARCH_SIGN_START:
+            return {
+                ...state,
+            };
+        case RoadSignsActions.SEARCH_SIGN_SUCCESS:
+            return {
+                ...state,
+                searchSign: action.searchResults,
+            };
+        case RoadSignsActions.SEARCH_SIGN_FAILED:
+            return {
+                ...state,
+                error: action.payload,
+            };
         default: return state;
     }
 }

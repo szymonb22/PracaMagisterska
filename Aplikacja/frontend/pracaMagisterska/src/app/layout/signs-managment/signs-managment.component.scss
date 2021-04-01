@@ -41,12 +41,12 @@ li {
 
 .filterByName{
    justify-content: flex-start;
-   margin-left: 5%;
+   margin-left: 2%;
 }
 
 .filterByCategory{
     justify-content: flex-start;
-    margin-left: 5%;
+    margin-left: 2%;
 }
 
 .addSignBtn{
@@ -58,4 +58,5 @@ li {
 .goBackBtn{
     height: fit-content;
     margin-left: 2%;
+    cursor: pointer;
 }

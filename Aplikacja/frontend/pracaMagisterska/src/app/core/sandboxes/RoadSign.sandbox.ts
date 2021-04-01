@@ -31,4 +31,9 @@ export class RoadSignSandbox {
     removeSign(signId: number) {
         this.store.dispatch(new RoadSignActions.RemoveSignStart(signId));
     }
+
+    searchSign(name: string) {
+        this.store.dispatch(new RoadSignActions.SearchSignStart(name));
+        return this.store.select(state => state.roadSigns.searchSign);
+    }
 }
