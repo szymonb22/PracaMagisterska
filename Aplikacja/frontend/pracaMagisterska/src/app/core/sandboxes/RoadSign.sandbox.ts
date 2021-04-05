@@ -36,4 +36,17 @@ export class RoadSignSandbox {
         this.store.dispatch(new RoadSignActions.SearchSignStart(name));
         return this.store.select(state => state.roadSigns.searchSign);
     }
+
+    getSigns() {
+       return this.store.select(state => state.roadSigns);
+    }
+
+    getPagedSigns(page: number) {
+        this.store.dispatch(new RoadSignActions.LoadSigns(page));
+    }
+
+    loadEventsbyInserting(page: number) {
+        this.store.dispatch(new RoadSignActions.InsertSigns(page));
+    }
+
 }

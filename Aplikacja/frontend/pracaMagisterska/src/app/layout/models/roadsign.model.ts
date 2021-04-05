@@ -4,3 +4,8 @@ export class RoadSign {
     RoadSignCategory: string;
     PhotoFileName: string;
 }
+
+export class PagedSign<T>{
+    results:RoadSign[];
+    count:number;
+}

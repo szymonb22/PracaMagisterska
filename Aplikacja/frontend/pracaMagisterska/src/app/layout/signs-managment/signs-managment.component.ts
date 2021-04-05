@@ -5,7 +5,6 @@ import { RoadSign } from '../models/roadsign.model';
 import { AddSignComponent } from './add-sign/add-sign.component';
 import { EditSignComponent } from './edit-sign/edit-sign.component';
 import { RoadSignSandbox } from '../../core/sandboxes/RoadSign.sandbox';
-import { RoadsignService } from '../services/roadsign.service';
 
 @Component({
   selector: 'app-signs-managment',
@@ -14,7 +13,8 @@ import { RoadsignService } from '../services/roadsign.service';
 })
 
 export class SignsManagmentComponent implements OnInit {
-
+  count:number;
+  currentPage = 1;
   searchRequest: string;
   signsFromDataSet: RoadSign[];
   PhotoFilePath = "http://127.0.0.1:8000/dataset/";
@@ -27,13 +27,28 @@ export class SignsManagmentComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private route: Router,
     private signSandbox: RoadSignSandbox,
-    private signService:RoadsignService,
-    ) { }
+  ) { }
 
-  ngOnInit(): void {
- 
-    this.getAll();
+  ngOnInit() {
+    this.signSandbox.getSigns().subscribe(
+      res => {
+        this.signsFromDataSet = res.signs,
+        this.count = res.count;
+        console.log(res.signs)
+        console.log(res.count)
+      }
+    );
+    this.signSandbox.getPagedSigns(1);
   }
+
+  onScroll() {
+    console.log('in')
+    if (this.count!=this.signsFromDataSet.length) {
+      this.currentPage++;
+      this.signSandbox.loadEventsbyInserting(this.currentPage); 
+    }
+  }
+
 
   addClick() {
     const dialogConfig = new MatDialogConfig();
@@ -98,12 +113,11 @@ export class SignsManagmentComponent implements OnInit {
     this.route.navigateByUrl('main');
   }
 
-  search(){
+  search() {
     this.searchRequest = this.signNameFilter
-    console.log(this.searchRequest)
     this.signSandbox.searchSign(this.searchRequest).subscribe(
       res => this.signsFromDataSet = res,
-      
+
     )
   }
 }

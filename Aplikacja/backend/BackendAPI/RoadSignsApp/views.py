@@ -37,7 +37,7 @@ class roadSignByCategory(generics.ListAPIView):
     permissions_classes = [permissions.IsAuthenticated]
 
 class SmallPagesPagination(PageNumberPagination):  
-    page_size = 6
+    page_size = 12
 
 class pagedList(generics.ListAPIView):
     queryset = RoadSigns.objects.all()

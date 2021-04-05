@@ -15,6 +15,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from '../app/core/interceptors/Jwt.Interceptor';
 import { RoadSignSandbox } from './core/sandboxes/RoadSign.sandbox';
 import { UserSandbox } from './core/sandboxes/User.sandbox';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { UserSandbox } from './core/sandboxes/User.sandbox';
     ReactiveFormsModule,
     FormsModule,
     LayoutModule,
+    InfiniteScrollModule,
     StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([RoadSignEffects, UserEffects]),
   ],

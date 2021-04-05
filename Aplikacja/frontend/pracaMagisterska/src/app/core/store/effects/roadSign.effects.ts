@@ -77,6 +77,31 @@ export class RoadSignEffects {
         }))
     );
 
+    loadSigns$ = createEffect(() => this.actions$
+      .pipe(
+        ofType(RoadSignsActions.LOAD_SIGNS),
+        switchMap((action:RoadSignsActions.LoadSigns) => {
+          return this.roadSignService.getPagedRoadSigns(action.page)
+            .pipe(
+              map(roadSign => new RoadSignsActions.LoadSignsSuccess(roadSign)),
+              catchError(error => of(new RoadSignsActions.LoadSignsFailed(error)))
+            );
+        })
+      ));
+
+      InsertSigns$ = createEffect(()=> this.actions$.pipe(
+        ofType(RoadSignsActions.INSERT_SIGNS),
+        switchMap((action:RoadSignsActions.InsertSigns) => {
+          return this.roadSignService.getPagedRoadSigns(action.page)
+            .pipe(
+              map( roadSign => new RoadSignsActions.InsertSignsSuccess(roadSign, action.page)),
+              catchError(error => {
+                return of(new RoadSignsActions.InsertSignsFailed(error));
+              })
+            );
+        })
+      ));
+        
     constructor(
         private actions$: Actions,
         private roadSignService: RoadsignService

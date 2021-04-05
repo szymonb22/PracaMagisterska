@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { RoadSign } from '../../../layout/models/roadsign.model';
+import { PagedSign, RoadSign } from '../../../layout/models/roadsign.model';
 
 export const GET_ALL_ROAD_SIGNS_START = "[RoadSigns] GET_ALL_ROAD_SIGNS_START";
 export const GET_ALL_ROAD_SIGNS_SUCCESS = "[RoadSigns] GET_ALL_ROAD_SIGNS_SUCCESS";
@@ -24,6 +24,14 @@ export const GET_BY_CATEGORY_FAILED = "[RoadSigns] GET_BY_CATEGORY_FAILED";
 export const SEARCH_SIGN_START = "[RoadSign] SEARCH_SIGN_START";
 export const SEARCH_SIGN_SUCCESS = "[RoadSign] SEARCH_SIGN_SUCCESS";
 export const SEARCH_SIGN_FAILED = "[RoadSign] SEARCH_SIGN_FAILED";
+
+export const LOAD_SIGNS = '[ROAD SIGNS] LOAD_SIGNS';
+export const LOAD_SIGNS_SUCCESS = '[ROAD SIGNS] LOAD_SIGNS_SUCCESS';
+export const LOAD_SIGNS_FAILED = '[ROAD SIGNS] LOAD_SIGNS_FAILED ';
+
+export const INSERT_SIGNS = '[ROAD SIGNS] INSERT_SIGNSS';
+export const INSERT_SIGNS_SUCCESS = '[ROAD SIGNS] INSERT_SIGNS_SUCCESS';
+export const INSERT_SIGNS_FAILED = '[ROAD SIGNS] INSERT_SIGNS_FAILED';
 
 export class GetAllSignsStart implements Action {
     readonly type = GET_ALL_ROAD_SIGNS_START;
@@ -113,7 +121,39 @@ export class SearchSignFailed implements Action {
     readonly type = SEARCH_SIGN_FAILED;
     constructor(public payload: any) { }
 }
+
+export class InsertSigns implements Action {
+    readonly type = INSERT_SIGNS;
+    constructor(public page: number) { }
+}
+
+export class InsertSignsSuccess implements Action {
+    readonly type = INSERT_SIGNS_SUCCESS;
+    constructor(public signList: PagedSign<RoadSign[]>, public page: number) { }
+}
+
+export class InsertSignsFailed implements Action {
+    readonly type = INSERT_SIGNS_FAILED;
+    constructor(public payload: any) { }
+}
+
+export class LoadSigns implements Action {
+    readonly type = LOAD_SIGNS;
+    constructor(public page: number) { }
+}
+
+export class LoadSignsSuccess implements Action {
+    readonly type = LOAD_SIGNS_SUCCESS;
+    constructor(public payload: PagedSign<RoadSign[]>) { }
+}
+export class LoadSignsFailed implements Action {
+    readonly type = LOAD_SIGNS_FAILED;
+    constructor(public payload: any) { }
+}
+
+
 export type RoadSignsActions = GetAllSignsStart | GetAllSignsSuccess | GetAllSignsFailed | GetSignsByCategoryStart | GetSignsByCategorySuccess 
     | GetSignsByCategoryFailed | AddSignStart | AddSignSuccess | AddSignFailed | EditSignStart | EditSignSuccess | EditSignFailed 
-    | RemoveSignStart | RemoveSignSuccess | RemoveSignFailed | SearchSignStart | SearchSignSuccess | SearchSignFailed;
+    | RemoveSignStart | RemoveSignSuccess | RemoveSignFailed | SearchSignStart | SearchSignSuccess | SearchSignFailed | InsertSigns 
+    | InsertSignsSuccess | InsertSignsFailed | LoadSigns | LoadSignsSuccess | LoadSignsFailed;
     

@@ -10,10 +10,11 @@ import { MainComponent } from './main/main.component';
 import { SignsManagmentComponent } from './signs-managment/signs-managment.component';
 import { AddSignComponent } from './signs-managment/add-sign/add-sign.component';
 import { EditSignComponent } from './signs-managment/edit-sign/edit-sign.component';
-
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [LayoutComponent, MainComponent, SignsManagmentComponent, AddSignComponent, EditSignComponent],
   imports: [
+    InfiniteScrollModule,
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,

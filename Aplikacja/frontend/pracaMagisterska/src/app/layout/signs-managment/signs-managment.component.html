@@ -23,7 +23,7 @@
         </button>
       </div>
     </div>
-    <ul class="mainContainer">
+    <!-- <ul class="mainContainer">
       <li *ngFor="let sign of signsFromDataSet">
         <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
         <div>
@@ -36,6 +36,25 @@
           </div>
         </div>
       </li>
-    </ul>
+    </ul> -->
+  </div>
+  <div class="viewport" infiniteScroll [scrollWindow]="false" [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="3" (scrolled)="onScroll()">
+  <ul class="mainContainer">
+    <li *ngFor="let sign of signsFromDataSet">
+      <img [src]="PhotoFilePath+sign.PhotoFileName" height="250px" width="250px" alt="">
+      <div>
+        <span>{{sign.RoadSignName}}</span>
+      </div>
+      <div class="editDelButton">
+        <button mat-raised-button color="basic" (click)="editClick(sign)">edytuj</button>
+        <div class="delBtn">
+          <button mat-raised-button color="warn" (click)="deleteClick(sign)">usuń</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="signsFromDataSet?.length === 0" style="margin-left: 40px;">
+    Brak wyników
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { RoadSign } from '../models/roadsign.model';
+import { PagedSign, RoadSign } from '../models/roadsign.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,8 +35,8 @@ export class RoadsignService {
     return this.http.get<RoadSign[]>(this.ApiUrl + 'roadSign/category/?RoadSignCategory='+category);
   }
 
-  getPagedRoadSigns(page:number):Observable<RoadSign[]>{
-    return this.http.get<RoadSign[]>(this.ApiUrl + 'pagedRoadSign/?page='+page);
+  getPagedRoadSigns(page:number):Observable<PagedSign<RoadSign[]>>{
+    return this.http.get<PagedSign<RoadSign[]>>(this.ApiUrl + 'pagedRoadSign/?page='+page);
   }
   
   searchRoadSigns(name:string):Observable<RoadSign[]>{
