@@ -34,7 +34,7 @@ export class RoadSignEffects {
             return this.roadSignService.addSignToDataSet(action.payload).pipe(
                 mergeMap(() => {
                     return [new RoadSignsActions.AddSignSuccess(),
-                    new RoadSignsActions.GetAllSignsStart()];
+                    new RoadSignsActions.LoadSigns(1)];
                 }),
                 catchError((error: string) => of(new RoadSignsActions.AddSignFailed(error)))
             );
@@ -47,7 +47,7 @@ export class RoadSignEffects {
             return this.roadSignService.editSignFromDataSet(action.editSign).pipe(
                 mergeMap(() => {
                     return [new RoadSignsActions.EditSignSuccess(),
-                    new RoadSignsActions.GetAllSignsStart()];
+                    new RoadSignsActions.LoadSigns(1)];
                 }),
                 catchError((error: string) => of(new RoadSignsActions.EditSignFailed(error)))
             );
@@ -60,7 +60,7 @@ export class RoadSignEffects {
             return this.roadSignService.deleteSignFromDataSet(action.signId).pipe(
                 mergeMap(() => {
                     return [new RoadSignsActions.RemoveSignSuccess(),
-                    new RoadSignsActions.GetAllSignsStart()];
+                    new RoadSignsActions.LoadSigns(1)];
                 }),
                 catchError((error: string) => of(new RoadSignsActions.RemoveSignFailed(error)))
             );
