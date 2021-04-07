@@ -4,3 +4,4 @@ temat: Wykorzystanie  sieci neuronowych do wykrywania i rozpoznawania znaków dr
 Technologia:
 frontend: Angular
 backend: Python
+ZAI- branch ZAI
