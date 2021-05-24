@@ -1,0 +1,61 @@
+<div class="title">
+    <h1>Rozpoznawanie znaku </h1>
+</div>
+<div class="datasetBtn">
+    <button routerLink="/sign" mat-raised-button>
+        kategorie
+    </button>
+</div>
+<form action="" [formGroup]="Form">
+    <div class="checkBtn">
+        <div>
+            <h3>Wybór modelu</h3>
+            <mat-radio-group  aria-label="Select an option" formControlName="modelOption">
+                <mat-radio-button  value="1"[checked]='true'>model 1<mat-icon [matTooltip]="tooltipModel1"><span
+                            class="material-icons-outlined">info</span></mat-icon>
+                </mat-radio-button>
+                <mat-radio-button  value="2">model 2<mat-icon [matTooltip]="tooltipModel2"><span
+                            class="material-icons-outlined">info</span></mat-icon>
+                </mat-radio-button>
+                <mat-radio-button  value="3">model 3<mat-icon [matTooltip]="tooltipModel3"><span
+                            class="material-icons-outlined">info</span></mat-icon>
+                </mat-radio-button>
+                <mat-radio-button value="4">model 4<mat-icon [matTooltip]="tooltipModel4"><span
+                            class="material-icons-outlined">info</span></mat-icon>
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div>
+            <input class="file-input" multiple type="file" (change)="uploadPhoto($event)" placeholder="Rozpoznaj Znak"
+                formControlName="photo" class="mt-2" name="" id="" />
+        </div>
+        <!-- <input formControlName="photo" type="file"> -->
+        <div *ngIf="isDetected" style="display: flex; justify-content: space-between;">
+            <div *ngIf="responseData?.length>=2">
+                <div *ngFor='let x of responseData'>
+                    <!-- <div *ngFor='let res of x'> -->
+                        <h2>Rozpoznany znak {{x[0]}}</h2>
+                        <!-- <img [src]="detectImg" alt=""> -->
+                        <img [src]="signUrl+x[1]" alt="">
+                        <p>stopień pewności: {{x[2]}}</p>
+                    <!-- </div> -->
+                    <!-- <h2>Rozpoznany znak {{signName}}</h2> -->
+                    <!-- <img [src]="detectImg" alt=""> -->
+                    <!-- <img [src]="signUrl+x[1]" alt=""> -->
+                    <!-- <p>stopeień pewności: {{confidence}}</p> --> 
+                </div>
+
+            </div>
+            <div *ngIf="responseData?.length ==1">
+                <h2>Rozpoznany znak: {{signName}}</h2>
+                <img [src]="signUrl+detectImg" alt="">
+                <p>stopeień pewności: {{confidence}}</p>
+
+            </div>
+        </div>
+
+        <!-- <button (click)="recognize()" mat-raised-button>Sprawdź</button> -->
+    </div>
+
+</form>

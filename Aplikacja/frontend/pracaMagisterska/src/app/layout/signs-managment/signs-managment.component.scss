@@ -1,0 +1,92 @@
+.addBtn{
+    padding-left:90%;
+}
+.mainContainer{
+    display:flex;
+    flex-wrap: wrap;
+    margin: 0px;
+    padding: 20px 0;
+    justify-content: flex-start;
+    margin-left: 15px;
+    // align-items: center;
+}
+
+img{
+    max-width: 200px;
+    max-height: 200px;
+    object-fit: cover;
+}
+
+li {
+    margin: 10px;
+    width: 220px;
+    list-style: none;
+}
+.header{
+ padding-left: 2%;
+}
+
+.editDelButton{
+    display: flex;
+}
+
+.delBtn{
+    margin-left:55px;
+}
+
+.filterPanel{
+    display: flex;
+    flex-wrap: wrap; 
+}
+
+.filterByName{
+   justify-content: flex-start;
+   margin-left: 2%;
+}
+
+.filterByCategory{
+    justify-content: flex-start;
+    margin-left: 2%;
+}
+
+.addSignBtn{
+    justify-content: flex-end;
+    margin-left: auto;
+    margin-right: 2%; 
+}
+
+.goBackBtn{
+    height: fit-content;
+    margin-left: 2%;
+    cursor: pointer;
+}
+
+.viewport {
+    height: 75vh;
+    overflow: scroll;
+  
+    // scrollbar-width: none;
+    // -ms-overflow-style: none;
+    // &::-webkit-scrollbar {
+    //   width: 0px;
+    //   background: transparent;
+    //   display: none;
+    // }
+  }
+.sort_asc{
+margin-left: 1%;
+}
+.sort_desc{
+margin-left: 1%;
+}  
+// .disable-scrollbars {
+//     min-height: 100px;
+//     scrollbar-width: none;
+//     -ms-overflow-style: none;
+//     &::-webkit-scrollbar {
+//       width: 0px;
+//       background: transparent;
+//       display: none;
+//     }
+//   }
+    
